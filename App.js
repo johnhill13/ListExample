@@ -21,7 +21,8 @@ export default class App extends React.Component {
     this.setState(prevState => ({ showContacts: !prevState.showContacts }));
   };
   render() {
-    return (
+    if (this.state.showContacts) {
+      return (
         <SafeAreaView style={styles.container}>
           <View>
             <Button
@@ -29,12 +30,22 @@ export default class App extends React.Component {
               onPress={this.toggleContacts}
             ></Button>
           </View>
-        <ScrollView>
-          {contacts.map(contact => (
-            <Row key={contact.key} name={contact.name} phone={contact.phone} />
-          ))}
-        </ScrollView>
+          <ScrollView>
+            {contacts.map(contact => (
+              <Row
+                key={contact.key}
+                name={contact.name}
+                phone={contact.phone}
+              />
+            ))}
+          </ScrollView>
         </SafeAreaView>
+      );
+    }
+    return (
+      <View style={styles.container}>
+        <Button title="toggle contacts" onPress={this.toggleContacts}></Button>
+      </View>
     );
   }
 }
