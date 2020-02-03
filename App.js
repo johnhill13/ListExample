@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Button,
+  FlatList,
   ScrollView,
   StyleSheet,
   Text,
@@ -20,6 +21,9 @@ export default class App extends React.Component {
   toggleContacts = () => {
     this.setState(prevState => ({ showContacts: !prevState.showContacts }));
   };
+
+  renderItem = (obj) => <Row {...(obj.item)} />
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -30,15 +34,10 @@ export default class App extends React.Component {
           ></Button>
         </View>
         {this.state.showContacts && (
-          <ScrollView>
-            {contacts.map(contact => (
-              <Row
-                key={contact.key}
-                name={contact.name}
-                phone={contact.phone}
-              />
-            ))}
-          </ScrollView>
+          <FlatList
+            renderItem={obj => <Row {...(obj.item)} />}
+            data={contacts}
+        />
         )}
       </SafeAreaView>
     );

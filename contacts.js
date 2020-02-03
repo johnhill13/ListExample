@@ -21,7 +21,7 @@ const createContact = () => ({name: generateName(), phone: generatePhoneNumber()
 export const compareNames = (contact1, contact2) => contact1.name > contact2.name
 
 // add keys based on index, clone object and append key
-const addKeys = (val, key) => ({key: key, ...val})
+const addKeys = (val, key) => ({key: key.toString(), ...val})
 
 // create an array of length NUM_CONTACTS and assign keys
 export default Array.from({length: NUM_CONTACTS}, createContact).map(addKeys)
