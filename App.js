@@ -29,7 +29,7 @@ export default class App extends React.Component {
             onPress={this.toggleContacts}
           ></Button>
         </View>
-        {this.state.showContacts ? (
+        {this.state.showContacts && (
           <ScrollView>
             {contacts.map(contact => (
               <Row
@@ -39,7 +39,7 @@ export default class App extends React.Component {
               />
             ))}
           </ScrollView>
-        ) : null}
+        )}
       </SafeAreaView>
     );
   }
