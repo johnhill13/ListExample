@@ -21,15 +21,15 @@ export default class App extends React.Component {
     this.setState(prevState => ({ showContacts: !prevState.showContacts }));
   };
   render() {
-    if (this.state.showContacts) {
-      return (
-        <SafeAreaView style={styles.container}>
-          <View>
-            <Button
-              title="toggle contacts"
-              onPress={this.toggleContacts}
-            ></Button>
-          </View>
+    return (
+      <SafeAreaView style={styles.container}>
+        <View>
+          <Button
+            title="toggle contacts"
+            onPress={this.toggleContacts}
+          ></Button>
+        </View>
+        {this.state.showContacts ? (
           <ScrollView>
             {contacts.map(contact => (
               <Row
@@ -39,13 +39,8 @@ export default class App extends React.Component {
               />
             ))}
           </ScrollView>
-        </SafeAreaView>
-      );
-    }
-    return (
-      <View style={styles.container}>
-        <Button title="toggle contacts" onPress={this.toggleContacts}></Button>
-      </View>
+        ) : null}
+      </SafeAreaView>
     );
   }
 }
