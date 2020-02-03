@@ -10,7 +10,7 @@ import {
 import { Constants } from "expo";
 
 import contacts from "./contacts";
-import Row from "./Row"
+import Row from "./Row";
 
 export default class App extends React.Component {
   state = {
@@ -22,17 +22,19 @@ export default class App extends React.Component {
   };
   render() {
     return (
-        <View style={styles.container}>
-          <Button
-            title="toggle contacts"
-            onPress={this.toggleContacts}
-          ></Button>
-          <ScrollView>
-            {contacts.map(contact => (
-              <Row key={contact.key} name={contact.name} phone={contact.phone}/>
-            ))}
-          </ScrollView>
-        </View>
+        <SafeAreaView style={styles.container}>
+          <View>
+            <Button
+              title="toggle contacts"
+              onPress={this.toggleContacts}
+            ></Button>
+          </View>
+        <ScrollView>
+          {contacts.map(contact => (
+            <Row key={contact.key} name={contact.name} phone={contact.phone} />
+          ))}
+        </ScrollView>
+        </SafeAreaView>
     );
   }
 }
