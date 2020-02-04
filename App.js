@@ -10,19 +10,26 @@ import {
 } from "react-native";
 import { Constants } from "expo";
 
-import contacts from "./contacts";
+import contacts, { compareNames } from "./contacts";
 import Row from "./Row";
 
 export default class App extends React.Component {
   state = {
-    showContacts: false
+    showContacts: false,
+    contacts: contacts,
   };
 
   toggleContacts = () => {
     this.setState(prevState => ({ showContacts: !prevState.showContacts }));
   };
 
-  renderItem = (obj) => <Row {...(obj.item)} />
+  sort = () => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.sort(compareNames),
+    }))
+  }
+
+  renderItem = obj => <Row {...(obj.item)} />
 
   render() {
     return (
@@ -32,12 +39,13 @@ export default class App extends React.Component {
             title="toggle contacts"
             onPress={this.toggleContacts}
           ></Button>
+          <Button
+            title="sort contacts"
+            onPress={this.sort}
+          ></Button>
         </View>
         {this.state.showContacts && (
-          <FlatList
-            renderItem={obj => <Row {...(obj.item)} />}
-            data={contacts}
-        />
+          <FlatList renderItem={this.renderItem} data={this.state.contacts} />
         )}
       </SafeAreaView>
     );
