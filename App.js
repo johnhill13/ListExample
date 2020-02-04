@@ -25,7 +25,7 @@ export default class App extends React.Component {
 
   sort = () => {
     this.setState(prevState => ({
-      contacts: prevState.contacts.sort(compareNames),
+      contacts: [...prevState.contacts].sort(compareNames),
     }))
   }
 
