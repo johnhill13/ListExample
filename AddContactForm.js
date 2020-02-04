@@ -19,7 +19,7 @@ export default class AddContactForm extends React.Component {
 
   state = {
     name: "",
-    phone: "",
+    phone: ""
   };
 
   handleNameChange = name => {
@@ -27,19 +27,26 @@ export default class AddContactForm extends React.Component {
   };
 
   handlePhoneChange = phone => {
-    this.setState({ phone });
+    if (+phone >= 0 && phone.length <= 10) {
+      this.setState({ phone });
+    }
   };
 
-// one way to pass and does the same thing as below 
-//   handleSubmit = () => {
-//       this.props.onSubmit({name: this.state.name, phone: this.state.phone}
-//       )
-//   }
+  // one way to pass and does the same thing as below
+  //   handleSubmit = () => {
+  //       this.props.onSubmit({name: this.state.name, phone: this.state.phone}
+  //       )
+  //   }
 
-//better way to handle submit which does the same thing as above
+
+
+  //better way to handle submit which does the same thing as above
   handleSubmit = () => {
-      this.props.onSubmit(this.state)
-  }
+    if (+this.state.phone >= 0 && this.state.phone.length === 10 && this.state.name.length >= 3) {
+      this.props.onSubmit(this.state);
+    }
+  };
+
 
   render() {
     return (
