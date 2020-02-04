@@ -2,6 +2,7 @@ import React from "react";
 import {
   Button,
   FlatList,
+  SectionList,
   ScrollView,
   StyleSheet,
   Text,
@@ -12,11 +13,12 @@ import { Constants } from "expo";
 
 import contacts, { compareNames } from "./contacts";
 import Row from "./Row";
+import ContactsList from "./ContactsList";
 
 export default class App extends React.Component {
   state = {
     showContacts: false,
-    contacts: contacts,
+    contacts: contacts
   };
 
   toggleContacts = () => {
@@ -25,12 +27,9 @@ export default class App extends React.Component {
 
   sort = () => {
     this.setState(prevState => ({
-      contacts: [...prevState.contacts].sort(compareNames),
-    }))
-  }
-// this is what it looks like at this poin with renderItem - item: { name: String, phone: String }
-  renderItem = obj => <Row {...(obj.item)} />
-  // same as this--- renderItem = obj => <Row name={obj.item.name} phone={obj.item.phone}
+      contacts: [...prevState.contacts].sort(compareNames)
+    }));
+  };
 
   render() {
     return (
@@ -40,13 +39,10 @@ export default class App extends React.Component {
             title="toggle contacts"
             onPress={this.toggleContacts}
           ></Button>
-          <Button
-            title="sort contacts"
-            onPress={this.sort}
-          ></Button>
+          <Button title="sort contacts" onPress={this.sort}></Button>
         </View>
         {this.state.showContacts && (
-          <FlatList renderItem={this.renderItem} data={this.state.contacts} />
+          <ContactsList contacts={this.state.contacts} />
         )}
       </SafeAreaView>
     );
