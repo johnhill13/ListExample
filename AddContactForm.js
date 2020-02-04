@@ -19,8 +19,17 @@ export default class AddContactForm extends React.Component {
 
   state = {
     name: "",
-    phone: ""
+    phone: "",
+    isFromValid: false
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      this.state.name !== prevState.name ||
+      this.state.phone !== prevState.phone
+    )
+      this.validateForm();
+  }
 
   handleNameChange = name => {
     this.setState({ name });
@@ -32,21 +41,34 @@ export default class AddContactForm extends React.Component {
     }
   };
 
+  validateForm = () => {
+    if (
+      +this.state.phone >= 0 &&
+      this.state.phone.length === 10 &&
+      this.state.name.length >= 3
+    ) {
+      return this.setState({ isFormValid: true });
+    } else {
+      return this.setState({ isFormValid: false });
+    }
+  };
+
   // one way to pass and does the same thing as below
   //   handleSubmit = () => {
   //       this.props.onSubmit({name: this.state.name, phone: this.state.phone}
   //       )
   //   }
 
-
-
   //better way to handle submit which does the same thing as above
   handleSubmit = () => {
-    if (+this.state.phone >= 0 && this.state.phone.length === 10 && this.state.name.length >= 3) {
+    if (
+      +this.state.phone >= 0 &&
+      this.state.phone.length === 10 &&
+      this.state.name.length >= 3
+    ) {
       this.props.onSubmit(this.state);
     }
   };
-
 
   render() {
     return (
@@ -64,7 +86,11 @@ export default class AddContactForm extends React.Component {
           keyboardType="numeric"
           placeholder="Phone"
         />
-        <Button title="Submit" onPress={this.handleSubmit} />
+        <Button
+          title="Submit"
+          onPress={this.handleSubmit}
+          disabled={!this.state.isFormValid}
+        />
       </SafeAreaView>
     );
   }
