@@ -30,6 +30,17 @@ export default class AddContactForm extends React.Component {
     this.setState({ phone });
   };
 
+// one way to pass and does the same thing as below 
+//   handleSubmit = () => {
+//       this.props.onSubmit({name: this.state.name, phone: this.state.phone}
+//       )
+//   }
+
+//better way to handle submit which does the same thing as above
+  handleSubmit = () => {
+      this.props.onSubmit(this.state)
+  }
+
   render() {
     return (
       <SafeAreaView>
@@ -37,14 +48,16 @@ export default class AddContactForm extends React.Component {
           style={styles.input}
           onChangeText={this.handleNameChange}
           value={this.state.name}
+          placeholder="Name"
         />
         <TextInput
           style={styles.input}
           onChangeText={this.handlePhoneChange}
           value={this.state.phone}
           keyboardType="numeric"
+          placeholder="Phone"
         />
-        <Button title="Add Contact" />
+        <Button title="Submit" onPress={this.handleSubmit} />
       </SafeAreaView>
     );
   }

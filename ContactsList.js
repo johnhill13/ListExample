@@ -3,8 +3,10 @@ import { SectionList, Text } from "react-native";
 import PropTypes from "prop-types";
 
 import Row from "./Row";
+import { compareNames } from "./contacts";
 
-// this is what it looks like at this poin with renderItem - item: { name: String, phone: String }
+
+// this is what it looks like at this point with renderItem - item: { name: String, phone: String }
 const renderItem = obj => <Row {...obj.item} />;
 // renderItem is the same as this--- renderItem = obj => <Row name={obj.item.name} phone={obj.item.phone}
 
@@ -12,7 +14,7 @@ const renderItem = obj => <Row {...obj.item} />;
 const renderSectionHeader = obj => <Text>{obj.section.title}</Text>;
 
 const ContactsList = props => {
-const contactsByLetter = props.contacts.reduce((obj, contact) => {
+const contactsByLetter = props.contacts.sort(compareNames).reduce((obj, contact) => {
     const firstLetter = contact.name[0].toUpperCase()
     return {
         ...obj,
