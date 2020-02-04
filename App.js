@@ -28,8 +28,9 @@ export default class App extends React.Component {
       contacts: [...prevState.contacts].sort(compareNames),
     }))
   }
-
+// this is what it looks like at this poin with renderItem - item: { name: String, phone: String }
   renderItem = obj => <Row {...(obj.item)} />
+  // same as this--- renderItem = obj => <Row name={obj.item.name} phone={obj.item.phone}
 
   render() {
     return (
