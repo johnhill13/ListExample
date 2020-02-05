@@ -45,15 +45,27 @@ export default class AddContactForm extends React.Component {
       this.validateForm();
   }
 
-  handleNameChange = name => {
-    this.setState({ name });
+  getHandler = key => {
+    return val => {
+      this.setState({ [key]: val });
+    };
   };
 
-  handlePhoneChange = phone => {
-    if (+phone >= 0 && phone.length <= 10) {
-      this.setState({ phone });
-    }
-  };
+
+  handleNameChange = this.getHandler("name"); // returns val => {this.setState({this.setState({name: val})}) }
+
+  //   handleNameChange = name => {
+  //     this.setState({ name });
+  //   };
+
+  handlePhoneChange = this.getHandler("phone");
+
+  // former handlePhoneCHange
+    handlePhoneChange = phone => {
+      if (+phone >= 0 && phone.length <= 10) {
+        this.setState({ phone });
+      }
+    };
 
   validateForm = () => {
     if (
@@ -93,41 +105,6 @@ export default class AddContactForm extends React.Component {
             onChangeText={this.handleNameChange}
             value={this.state.name}
             placeholder="Name"
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={this.handlePhoneChange}
-            value={this.state.phone}
-            keyboardType="numeric"
-            placeholder="Phone"
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={this.handlePhoneChange}
-            value={this.state.phone}
-            keyboardType="numeric"
-            placeholder="Phone"
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={this.handlePhoneChange}
-            value={this.state.phone}
-            keyboardType="numeric"
-            placeholder="Phone"
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={this.handlePhoneChange}
-            value={this.state.phone}
-            keyboardType="numeric"
-            placeholder="Phone"
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={this.handlePhoneChange}
-            value={this.state.phone}
-            keyboardType="numeric"
-            placeholder="Phone"
           />
           <TextInput
             style={styles.input}
