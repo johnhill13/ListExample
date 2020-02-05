@@ -1,14 +1,28 @@
 import React from "react";
-import { TextInput, SafeAreaView, Button, StyleSheet } from "react-native";
+import {
+  TextInput,
+  KeyboardAvoidingView,
+  SafeAreaView,
+  Button,
+  StyleSheet
+} from "react-native";
 
 import PropTypes from "prop-types";
 
 const styles = StyleSheet.create({
   input: {
-    padding: 5,
-    marginBottom: 5,
     borderColor: "black",
-    borderWidth: 1
+    borderWidth: 1,
+    borderRadius: 3,
+    paddingVertical: 5,
+    paddingHorizontal: 20,
+    marginHorizontal: 20,
+    marginTop: 20,
+    minWidth: 100
+  },
+  container: {
+    flex: 1,
+    justifyContent: "center"
   }
 });
 
@@ -72,26 +86,63 @@ export default class AddContactForm extends React.Component {
 
   render() {
     return (
-      <SafeAreaView>
-        <TextInput
-          style={styles.input}
-          onChangeText={this.handleNameChange}
-          value={this.state.name}
-          placeholder="Name"
-        />
-        <TextInput
-          style={styles.input}
-          onChangeText={this.handlePhoneChange}
-          value={this.state.phone}
-          keyboardType="numeric"
-          placeholder="Phone"
-        />
-        <Button
-          title="Submit"
-          onPress={this.handleSubmit}
-          disabled={!this.state.isFormValid}
-        />
-      </SafeAreaView>
+      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <SafeAreaView>
+          <TextInput
+            style={styles.input}
+            onChangeText={this.handleNameChange}
+            value={this.state.name}
+            placeholder="Name"
+          />
+          <TextInput
+            style={styles.input}
+            onChangeText={this.handlePhoneChange}
+            value={this.state.phone}
+            keyboardType="numeric"
+            placeholder="Phone"
+          />
+          <TextInput
+            style={styles.input}
+            onChangeText={this.handlePhoneChange}
+            value={this.state.phone}
+            keyboardType="numeric"
+            placeholder="Phone"
+          />
+          <TextInput
+            style={styles.input}
+            onChangeText={this.handlePhoneChange}
+            value={this.state.phone}
+            keyboardType="numeric"
+            placeholder="Phone"
+          />
+          <TextInput
+            style={styles.input}
+            onChangeText={this.handlePhoneChange}
+            value={this.state.phone}
+            keyboardType="numeric"
+            placeholder="Phone"
+          />
+          <TextInput
+            style={styles.input}
+            onChangeText={this.handlePhoneChange}
+            value={this.state.phone}
+            keyboardType="numeric"
+            placeholder="Phone"
+          />
+          <TextInput
+            style={styles.input}
+            onChangeText={this.handlePhoneChange}
+            value={this.state.phone}
+            keyboardType="numeric"
+            placeholder="Phone"
+          />
+          <Button
+            title="Submit"
+            onPress={this.handleSubmit}
+            disabled={!this.state.isFormValid}
+          />
+        </SafeAreaView>
+      </KeyboardAvoidingView>
     );
   }
 }
